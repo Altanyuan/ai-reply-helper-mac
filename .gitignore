@@ -1,0 +1,32 @@
+# ---- 敏感信息：含真实 API Key，绝不能进版本库 ----
+config.json
+config - *.json
+.env
+
+# ---- 构建产物 ----
+build/
+dist/
+*.pkg
+icons/          # 构建时由 icon_source.png 生成，不纳入版本库
+
+# ---- 运行时生成 ----
+*.log
+polish.log
+debug.log
+.wechat_polish.lock
+
+# ---- 探针产物（窗口截图与 OCR 报告，含聊天内容，绝不能进版本库）----
+probe/probe_out/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# ---- 编辑器 / IDE 本地配置 ----
+.codebuddy/
+.vscode/
+.idea/

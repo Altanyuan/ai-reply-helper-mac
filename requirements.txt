@@ -1,0 +1,28 @@
+# 运行依赖（macOS）
+#
+#   python3 -m pip install -r requirements.txt
+#
+# 或者直接用 run-mac.command：它会自动建 .venv 并安装本文件。
+
+# ---- 第三方库 ----
+pynput>=1.7.6              # 全局热键 + 键盘模拟（需要「辅助功能」权限）
+pyperclip>=1.8.2           # 剪贴板读写（走 pbcopy / pbpaste）
+requests>=2.31.0           # 调大模型接口
+Pillow>=10.0.0             # 动图解码 / 截图裁剪 / 灰度分析
+
+# ---- 系统框架绑定（PyObjC）----
+# 上限压在 <12：当前代码是在 11.1 上实测通过（窗口枚举 / 截图 / Vision OCR / 回填全链路），
+# 12.x 是大版本跳跃、未经验证，先不自动跨过去。
+pyobjc-framework-Cocoa>=10.0,<12               # Foundation / AppKit（NSData、NSRunningApplication）
+pyobjc-framework-Quartz>=10.0,<12              # CGWindowListCopyWindowInfo、权限检测
+pyobjc-framework-Vision>=10.0,<12              # VNRecognizeTextRequest（中文 OCR）
+pyobjc-framework-ApplicationServices>=10.0,<12  # AXUIElement（读草稿 / 回填）
+
+# 首次运行前记得授权（缺了的表现是「按了没反应」，启动日志与终端会提示）：
+#   系统设置 › 隐私与安全性 › 辅助功能        → 勾选本程序（立即生效）
+#   系统设置 › 隐私与安全性 › 录屏与系统录音    → 勾选本程序后必须退出重开才生效
+#
+# 已知无害告警：若用系统自带的 Python 3.9（LibreSSL 2.8.3），首次联网会打印
+#   NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+ ...
+# 请求能正常发出（实测调用成功），只是告警。想彻底消掉，用 python.org 或
+# Homebrew 装 Python 3.11+ 后重跑 run-mac.command（会自动重建 .venv）。

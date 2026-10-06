@@ -1,0 +1,12 @@
+# 构建 .app 需要的**额外**依赖（运行时不需要）。
+#
+#   python3 -m pip install -r requirements-build.txt
+#   ./build_macos.sh
+#
+# 说明：先 `-r requirements.txt` 把运行依赖装齐，再加 PyInstaller ——
+# PyInstaller 只是打包工具，**不会**进入最终产物。
+-r requirements.txt
+
+# 6.x 起对 macOS + PyObjC + Tk 的收集更完整，且默认会做 ad-hoc 签名
+# （Apple Silicon 上未签名的可执行文件无法运行，这一步是必需的）。
+pyinstaller>=6.0
